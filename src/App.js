@@ -26,7 +26,6 @@ class BooksApp extends React.Component {
   }
 
   doSearch(q) {
-    console.log('query: '+q)
     if (q) {
     BooksAPI.search(q).then((result) => {
       if (result && Array.isArray(result) && result.length > 0) {
@@ -43,7 +42,6 @@ class BooksApp extends React.Component {
   }
 
   render() {
-    console.log(this.state.search)
     return (
       <div className="app">
         
