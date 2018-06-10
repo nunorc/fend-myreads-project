@@ -13,4 +13,4 @@ Start the development server using:
 
     $ npm start
 
-With the development server running, visit the site: `http://localhost:8000` in your browser.
+With the development server running, visit the site: `http://localhost:3000` in your browser.
