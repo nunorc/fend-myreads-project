@@ -25,10 +25,15 @@ class BooksApp extends React.Component {
     })
   }
 
-  doSearch(q) {
+  doSearch = (q) => {
     if (q) {
     BooksAPI.search(q).then((result) => {
       if (result && Array.isArray(result) && result.length > 0) {
+        result = result.map((book) => {
+          const found = this.state.books.find((curr) => curr.id === book.id)
+          console.log(found)
+          return (found ? found : book)
+        })
         this.setState({query: q, search: result})
       }
       else {
@@ -60,7 +65,6 @@ class BooksApp extends React.Component {
               <BookList
                 books  = {this.state.search}
                 update = {this.update}
-                shelf  = 'none'
               />
             </div>
           </div>
@@ -79,7 +83,6 @@ class BooksApp extends React.Component {
                     <BookList
                       books  = {this.state.books.filter((book) => book.shelf === 'currentlyReading')}
                       update = {this.update}
-                      shelf  = 'currentlyReading'
                     />
                   </div>
                 </div>
@@ -89,7 +92,6 @@ class BooksApp extends React.Component {
                     <BookList
                       books  = {this.state.books.filter((book) => book.shelf === 'wantToRead')}
                       update = {this.update}
-                      shelf  = 'wantToRead'
                     />
                   </div>
                 </div>
@@ -99,7 +101,6 @@ class BooksApp extends React.Component {
                     <BookList
                       books  = {this.state.books.filter((book) => book.shelf === 'read')}
                       update = {this.update}
-                      shelf  = 'read'
                     />
                   </div>
                 </div>

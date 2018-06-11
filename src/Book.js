@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 class Book extends Component {
   render() {
-    const { book, update, shelf } = this.props
+    const { book, update } = this.props
 
     let thumbnail = 'imgs/default.png'
     if (book && book.imageLinks && book.imageLinks.thumbnail)
@@ -13,7 +13,7 @@ class Book extends Component {
     	authors = book.authors
 
     if (book) {
-    return (
+      return (
       	<div className="book">
         <div className="book-top">
           <div className="book-cover" style={{
@@ -22,7 +22,7 @@ class Book extends Component {
           	  backgroundImage: `url(${thumbnail})`
           	}}></div>
             <div className="book-shelf-changer">
-              <select onChange={(e) => {update(book, e.target.value)}} value={shelf}>
+              <select onChange={(e) => {update(book, e.target.value)}} value={book.shelf || 'none'}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading">Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
@@ -34,7 +34,7 @@ class Book extends Component {
           <div className="book-title">{book.title}</div>
           <div className="book-authors">{authors.join(', ')}</div>
         </div>
-    )
+      )
     }
     else {
       return null
